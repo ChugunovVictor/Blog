@@ -104,6 +104,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "chugunovvictor-github-io"
+    }
+  },
+  "defaultProject": "chugunovvictor-github-io",
+  "cli": {
+    "analytics": "ae9c5b50-ab81-41bc-addf-7972b046bf09"
+  }
 }

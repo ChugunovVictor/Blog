@@ -1,0 +1,22 @@
+{
+  "root": [
+    {
+      "title": "Электроника", "path": "electronics",
+      "children": [
+        { "title": "Электроника - часть 1", "path": "electronics1.html" },
+        { "title": "Электроника - часть 2", "path": "electronics2.html" }
+      ]
+    },
+    {
+      "title": "Математика", "path": "math",
+      "children": [
+        { "title": "Математика - часть 1", "path": "math1.html" },
+        { "title": "Математика - часть 2", "path": "math2.html" }
+      ]
+    },
+    {
+      "title": "Программирование", "path": "programming",
+      "children": []
+    }
+  ]
+}

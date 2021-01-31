@@ -6,6 +6,17 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        skipStartupTypeset: true,
+        tex2jax: { inlineMath: [["$", "$"]],displayMath:[["$$", "$$"]] }
+      });
+      MathJax.Hub.Register.StartupHook('End', () => {
+        window.hubReady.next();
+        window.hubReady.complete();
+      });
+  </script>
 </head>
 <body>
   <app-root></app-root>

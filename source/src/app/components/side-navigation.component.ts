@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import toc from '../../assets/table_of_contents/table_of_contents.json'
-import { Menu, MenuItem } from "../model/menu";
+import {Menu, MenuItem} from "../model/menu";
 
 @Component({
     selector: 'app-side-navigation',
@@ -10,7 +10,8 @@ import { Menu, MenuItem } from "../model/menu";
                 {{ menu.title }}
                 <ul class="menuItemList">
                     <li *ngFor="let item of menu.children">
-                        <a routerLink="/view" [queryParams]="{ path: menu.path + '/' + item.path }" routerLinkActive="active">{{ item.title }}</a>
+                        <a routerLink="/view" [queryParams]="{ path: menu.path + '/' + item.path }"
+                           routerLinkActive="active">{{ item.title }}</a>
                     </li>
                 </ul>
             </li>
@@ -33,7 +34,7 @@ import { Menu, MenuItem } from "../model/menu";
             `.app-side-navigation {
             padding: 8px;
         }`,
-            `.menuItemList{
+            `.menuItemList {
             font-size: small;
             padding-inline-start: 10px;
         }`

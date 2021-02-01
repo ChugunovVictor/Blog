@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~katex/dist/katex.css';
+@import '~highlight.js/styles/default.css';
 
 .app-root {
     position: absolute;
@@ -13,5 +14,14 @@
     flex-direction: row;
     justify-content: stretch;
     align-items: stretch;
+}
+
+.hljs-ln td:first-of-type {
+    border-right: black 0.5px solid;
+    padding-right: 4px;
+}
+
+.hljs-ln td:nth-of-type(2) {
+    padding-left: 4px;
 }
 

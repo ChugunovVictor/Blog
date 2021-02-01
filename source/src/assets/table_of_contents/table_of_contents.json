@@ -16,7 +16,9 @@
     },
     {
       "title": "Программирование", "path": "programming",
-      "children": []
+      "children": [
+        { "title": "Тест", "path": "prog1.html" }
+      ]
     }
   ]
 }

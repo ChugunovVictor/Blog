@@ -54,6 +54,9 @@
               "src/styles.css"
             ],
             "scripts": [
+            ],
+            "allowedCommonJsDependencies": [
+              "highlight.js"
             ]
           },
           "configurations": {

@@ -14,7 +14,23 @@
     flex-direction: row;
     justify-content: stretch;
     align-items: stretch;
+    overflow: hidden;
 }
+
+.content{
+    flex: 1;
+    overflow: auto;
+}
+
+.content::-webkit-scrollbar{
+    width: 2px;
+}
+
+.content::-webkit-scrollbar-thumb {
+    width: 2px;
+    border-radius: 2px;
+    background-color: black;
+  }
 
 .hljs-ln td:first-of-type {
     border-right: black 0.5px solid;

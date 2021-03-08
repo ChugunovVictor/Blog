@@ -8,7 +8,7 @@ import { map, flatMap } from 'rxjs/operators';
 @Component({
     selector: 'app-view',
     template: `
-        <ngx-dynamic-hooks [content]="content"></ngx-dynamic-hooks>
+        <ngx-dynamic-hooks [content]="content" options></ngx-dynamic-hooks>
     `,
     styles: []
 })

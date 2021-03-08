@@ -27,7 +27,7 @@ import {Menu, MenuItem} from "../model/menu";
             content: "";
             float: left;
             background: black;
-            width: 2px;
+            width: 0.5px;
             height: 100%;
             border-radius: 2px;
         }`,

@@ -2,16 +2,18 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {KatexModule, KatexParagraphComponent} from 'ng-katex';
+import {KatexComponent, KatexModule, KatexParagraphComponent} from 'ng-katex';
 import {SideNavigationComponent} from './components/side-navigation.component';
 import {ViewComponent} from './components/view.component';
 import {HttpClientModule} from "@angular/common/http";
 import {DynamicHooksModule, HookParserEntry} from 'ngx-dynamic-hooks';
 import {HighlightModule, HIGHLIGHT_OPTIONS} from 'ngx-highlightjs';
 import {CodeBlockComponent} from './components/code-block.component';
+import { AbcdComponent } from './components/abcd.component';
 
 const componentParsers: Array<HookParserEntry> = [
     {component: KatexParagraphComponent},
+    {component: KatexComponent},
     {component: CodeBlockComponent},
 ];
 
@@ -20,7 +22,8 @@ const componentParsers: Array<HookParserEntry> = [
         AppComponent,
         SideNavigationComponent,
         ViewComponent,
-        CodeBlockComponent
+        CodeBlockComponent,
+        AbcdComponent,
     ],
     imports: [
         BrowserModule,
@@ -29,7 +32,8 @@ const componentParsers: Array<HookParserEntry> = [
         HttpClientModule,
         HighlightModule,
         DynamicHooksModule.forRoot({
-            globalParsers: componentParsers
+            globalParsers: componentParsers,
+            globalOptions: { convertHTMLEntities: false, sanitize: false }
         }),
     ],
     providers: [{
@@ -44,7 +48,7 @@ const componentParsers: Array<HookParserEntry> = [
         }
     }],
     bootstrap: [AppComponent],
-    entryComponents: [KatexParagraphComponent, CodeBlockComponent],
+    entryComponents: [KatexComponent, KatexParagraphComponent, CodeBlockComponent],
 })
 export class AppModule {
 }

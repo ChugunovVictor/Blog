@@ -1,5 +1,7 @@
 import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 
+// contenteditable="true"
+
 @Component({
   selector: 'app-code-block',
   template: `
@@ -12,17 +14,17 @@ import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@a
     </pre>
   `,
   styles: [
+    'pre { margin: 0; }',
   ]
 })
 export class CodeBlockComponent implements AfterViewInit {
-
   code: string = "";
   @ViewChild('wrapper') content: ElementRef;
 
   constructor() {}
 
   ngAfterViewInit() {
-    this.code = this.content.nativeElement.innerHTML.trim();
+    this.code = this.content.nativeElement.innerText.trim();
   }
 
 }

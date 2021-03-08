@@ -5,7 +5,10 @@ import {Component} from '@angular/core';
     template: `
         <div class="app-root">
             <app-side-navigation></app-side-navigation>
-            <router-outlet></router-outlet>
+            <div class="content">
+                <router-outlet></router-outlet>
+            </div>
+            <app-abcd-component></app-abcd-component>
         </div>
     `
 })

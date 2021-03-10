@@ -1,0 +1,66 @@
+<h1> Functional Sets </h1>
+
+Eager evaluation / Lazy evaluation description
+<br>
+
+An idea was taken from Martin Odersky course 'Functional Programming in Scala'.
+
+<h2 style="margin:0">JavaScript</h2>
+<app-code-block>
+let canvas = document.getElementById("canvas");
+let ctx = canvas.getContext("2d");
+let template = PATH.split(/[\s,]+/);
+
+let M = x => y => ctx.moveTo(x, y);
+let L = x => y => ctx.lineTo(x, y);
+let C = x1 => y1 => cx => cy => x2 => y2 => ctx.bezierCurveTo(x1, y1, cx, cy, x2, y2);
+
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+ctx.beginPath();
+for (let i = 0, f = undefined; i < template.length; i++) {
+    if (f === undefined) switch (template[i]) {
+    case "M": { f = M; break; }
+    case "L": { f = L; break; }
+    case "C": { f = C; break; }
+    default: break;
+    }
+    else { f = f(template[i]) }
+}
+ctx.fill();
+</app-code-block>
+<h2 style="margin:0">Scala</h2>
+<app-code-block>
+type FunSet = Int => Boolean
+val bound = 1000
+
+def contains(s: FunSet, elem: Int): Boolean = s(elem)
+def singletonSet(elem: Int): FunSet = x => x == elem
+
+def addOne(s: FunSet, elem: Int): FunSet = { if (contains(s, elem)) s else x => x == elem | contains(s, x) }
+def add(s: FunSet, elements: Int*): FunSet = elements.foldLeft(s)((acc, c) => addOne(acc, c))
+
+def union(s: FunSet, t: FunSet): FunSet = x => contains(s, x) | contains(t, x)
+def intersect(s: FunSet, t: FunSet): FunSet = x => contains(s, x) & contains(t, x)
+def diff(s: FunSet, t: FunSet): FunSet = x => contains(s, x) & !contains(t, x)
+
+def filter(s: FunSet, p: Int => Boolean): FunSet = x => contains(s, x) && p(x)
+def map(s: FunSet, f: Int => Int): FunSet = {
+    val xs = for (i <- -bound to bound if contains(s, i)) yield i
+    xs.map(f).foldLeft(singletonSet(xs.head))((acc, c) => add(acc, c))
+}
+
+def toString(s: FunSet): String = {
+    val xs = for (i <- -bound to bound if contains(s, i)) yield i
+    xs.mkString("{", ",", "}")
+}
+
+def test(func: (FunSet, FunSet) => FunSet ) = func(
+    add( singletonSet(0), 1, 2, 3 ),
+    add( singletonSet(5), 6, 2, 3 ),
+)
+
+toString(test(union)) // {0,1,2,3,5,6}
+toString(test(intersect)) // {2,3}
+toString(test(diff)) // {0,1}
+toString(map(test(union), x=>x*x)) // {0,1,4,9,25,36}
+</app-code-block>

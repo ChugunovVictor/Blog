@@ -31,8 +31,9 @@ As an example I choosed <b>SVG</b> path:
     </svg>
 </div>
 
-<h2 style="margin:0">JavaScript</h2>
-<app-code-block>
+<app-tabs>
+    <app-tab-block header="JavaScript">
+        <app-code-block>
 let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
 let template = PATH.split(/[\s,]+/);
@@ -54,8 +55,9 @@ for (let i = 0, f = undefined; i < template.length; i++) {
 }
 ctx.fill();
 </app-code-block>
-<h2 style="margin:0">Scala</h2>
-<app-code-block>
+</app-tab-block>
+<app-tab-block header="Scala">
+    <app-code-block>
 def M = (x: Float) => (y: Float)  println(s"Move to ($x,$y)");
 def L = (x: Float) => (y: Float) => println(s"Line to ($x,$y)");
 def C = (x1: Float) => (y1: Float) =>
@@ -78,3 +80,5 @@ PATH.split(Array(' ', ','))
         }
 })
 </app-code-block>
+</app-tab-block>
+</app-tabs>

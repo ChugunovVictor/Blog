@@ -5,31 +5,9 @@ Eager evaluation / Lazy evaluation description
 
 An idea was taken from Martin Odersky course 'Functional Programming in Scala'.
 
-<h2 style="margin:0">JavaScript</h2>
-<app-code-block>
-let canvas = document.getElementById("canvas");
-let ctx = canvas.getContext("2d");
-let template = PATH.split(/[\s,]+/);
-
-let M = x => y => ctx.moveTo(x, y);
-let L = x => y => ctx.lineTo(x, y);
-let C = x1 => y1 => cx => cy => x2 => y2 => ctx.bezierCurveTo(x1, y1, cx, cy, x2, y2);
-
-ctx.clearRect(0, 0, canvas.width, canvas.height);
-ctx.beginPath();
-for (let i = 0, f = undefined; i < template.length; i++) {
-    if (f === undefined) switch (template[i]) {
-    case "M": { f = M; break; }
-    case "L": { f = L; break; }
-    case "C": { f = C; break; }
-    default: break;
-    }
-    else { f = f(template[i]) }
-}
-ctx.fill();
-</app-code-block>
-<h2 style="margin:0">Scala</h2>
-<app-code-block>
+<app-tabs>
+    <app-tab-block header="Scala">
+        <app-code-block>
 type FunSet = Int => Boolean
 val bound = 1000
 
@@ -49,7 +27,7 @@ def map(s: FunSet, f: Int => Int): FunSet = {
     xs.map(f).foldLeft(singletonSet(xs.head))((acc, c) => add(acc, c))
 }
 
-def toString(s: FunSet): String = {
+def toStringFS(s: FunSet): String = {
     val xs = for (i <- -bound to bound if contains(s, i)) yield i
     xs.mkString("{", ",", "}")
 }
@@ -59,8 +37,49 @@ def test(func: (FunSet, FunSet) => FunSet ) = func(
     add( singletonSet(5), 6, 2, 3 ),
 )
 
-toString(test(union)) // {0,1,2,3,5,6}
-toString(test(intersect)) // {2,3}
-toString(test(diff)) // {0,1}
-toString(map(test(union), x=>x*x)) // {0,1,4,9,25,36}
-</app-code-block>
+toStringFS(test(union)) // {0,1,2,3,5,6}
+toStringFS(test(intersect)) // {2,3}
+toStringFS(test(diff)) // {0,1}
+toStringFS(map(test(union), x=>x*x)) // {0,1,4,9,25,36}
+        </app-code-block>
+    </app-tab-block>
+    <app-tab-block header="JavaScript">
+        <app-code-block>
+const bound = 1000
+
+let contains = (s, elem) => s(elem)
+let singletonSet = (elem) => x => x == elem
+    
+let addOne = (s, elem) => (contains(s, elem)) ? s : x => x == elem | contains(s, x)
+let add = (s, ...elements) => elements.reduce((prev, next) => addOne(prev, next), s)
+    
+let union = (s, t) => x => contains(s, x) | contains(t, x)
+let intersect = (s, t) => x => contains(s, x) & contains(t, x)
+let diff = (s, t) => x => contains(s, x) & !contains(t, x)
+    
+let filter = (s, p) => x => contains(s, x) && p(x)
+let map = (s, f) => {
+    let n = Array(bound * 2 + 1).fill().map((_, i) => i - bound);
+    let nm = n.filter(i => contains(s, i)).map(r => f(r))
+    return nm.reduce((prev, next) => add(prev, next), singletonSet(nm[0]))
+}
+    
+let toStringFS = (s) => {
+    let n = Array(bound * 2 + 1).fill().map((_, i) => i - bound);
+    console.log( n.filter(i => contains(s, i)).join(',') )
+}
+    
+let test = (func) => func(
+    add( singletonSet(0), 1, 2, 3 ),
+    add( singletonSet(5), 6, 2, 3 ),
+)
+    
+toStringFS(test(union)) // {0,1,2,3,5,6}
+toStringFS(test(intersect)) // {2,3}
+toStringFS(test(diff)) // {0,1}
+toStringFS(map(test(union), x=>x*x)) // {0,1,4,9,25,36}
+        </app-code-block>
+    </app-tab-block>
+</app-tabs>
+
+

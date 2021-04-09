@@ -261,7 +261,126 @@ AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCompo
 /*! exports provided: root, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"root\":[{\"title\":\"Development\",\"path\":\"programming\",\"children\":[{\"title\":\"Carrying Sequences\",\"path\":\"CarryingSequences.html\"},{\"title\":\"Functional Sets\",\"path\":\"FunctionalSets.html\"}]}]}");
+module.exports = JSON.parse("{\"root\":[{\"title\":\"Development\",\"path\":\"programming\",\"children\":[{\"title\":\"Carrying Sequences\",\"path\":\"CarryingSequences.html\"},{\"title\":\"Functional Sets\",\"path\":\"FunctionalSets.html\"},{\"title\":\"MENACE\",\"path\":\"Menace.html\"}]}]}");
+
+/***/ }),
+
+/***/ "XPCo":
+/*!**********************************************!*\
+  !*** ./src/app/components/tabs.component.ts ***!
+  \**********************************************/
+/*! exports provided: TabBlockComponent, TabsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TabBlockComponent", function() { return TabBlockComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TabsComponent", function() { return TabsComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "ofXK");
+
+
+
+const _c0 = ["*"];
+function TabsComponent_span_1_Template(rf, ctx) { if (rf & 1) {
+    const _r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "span", 2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TabsComponent_span_1_Template_span_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r3); const t_r1 = ctx.$implicit; const ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r2.open(t_r1); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const t_r1 = ctx.$implicit;
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](t_r1);
+} }
+class TabBlockComponent {
+    constructor() { }
+}
+TabBlockComponent.ɵfac = function TabBlockComponent_Factory(t) { return new (t || TabBlockComponent)(); };
+TabBlockComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: TabBlockComponent, selectors: [["app-tab-block"]], hostVars: 1, hostBindings: function TabBlockComponent_HostBindings(rf, ctx) { if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵattribute"]("header", ctx.header);
+    } }, inputs: { header: "header" }, ngContentSelectors: _c0, decls: 1, vars: 0, template: function TabBlockComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵprojectionDef"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵprojection"](0);
+    } }, encapsulation: 2 });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](TabBlockComponent, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+                selector: 'app-tab-block',
+                template: `
+    <ng-content></ng-content>
+  `,
+                styles: []
+            }]
+    }], function () { return []; }, { header: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["HostBinding"],
+            args: ['attr.header']
+        }, {
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }] }); })();
+class TabsComponent {
+    constructor() {
+        this.headers = [];
+    }
+    // @ContentChildren(forwardRef(() => TabBlockComponent), { descendants: true }) elements;
+    onDynamicMount(data) {
+        this.contentChildren = data.contentChildren;
+        for (let i in this.contentChildren) {
+            let native = this.contentChildren[i].componentRef.location.nativeElement;
+            this.headers.push(native.getAttribute('header'));
+            if (Number(i) !== 0)
+                native.style.setProperty('display', 'none');
+        }
+    }
+    open(title) {
+        for (let i in this.contentChildren) {
+            let native = this.contentChildren[i].componentRef.location.nativeElement;
+            if (title !== native.getAttribute('header'))
+                native.style.setProperty('display', 'none');
+            else
+                native.style.setProperty('display', 'block');
+        }
+    }
+}
+TabsComponent.ɵfac = function TabsComponent_Factory(t) { return new (t || TabsComponent)(); };
+TabsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: TabsComponent, selectors: [["app-tabs"]], ngContentSelectors: _c0, decls: 3, vars: 1, consts: [[1, "tab"], ["class", "tablinks", 3, "click", 4, "ngFor", "ngForOf"], [1, "tablinks", 3, "click"]], template: function TabsComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵprojectionDef"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, TabsComponent_span_1_Template, 2, 1, "span", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵprojection"](2);
+    } if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.headers);
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["NgForOf"]], styles: [".tab[_ngcontent-%COMP%] {\n      overflow: hidden;\n    }", ".tablinks[_ngcontent-%COMP%] {\n      float: left;\n      cursor: pointer;\n      padding: 8px 16px;\n      font-size: 17px;\n    }", ".tablinks[_ngcontent-%COMP%]:not(:last-child) {\n      border-right: solid 1px black;\n    }", ".tablinks[_ngcontent-%COMP%]:hover {\n      text-decoration: underline;\n      text-underline-offset: 3px;\n    }"] });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](TabsComponent, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+                selector: 'app-tabs',
+                template: `
+  <div class="tab">
+    <span class="tablinks" (click)="open(t)" *ngFor="let t of headers">{{t}}</span>
+  </div>
+  <ng-content></ng-content>
+  `,
+                styles: [
+                    `.tab {
+      overflow: hidden;
+    }`, `.tablinks {
+      float: left;
+      cursor: pointer;
+      padding: 8px 16px;
+      font-size: 17px;
+    }`, `.tablinks:not(:last-child) {
+      border-right: solid 1px black;
+    }`, `.tablinks:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }`
+                ]
+            }]
+    }], function () { return []; }, null); })();
+
 
 /***/ }),
 
@@ -287,6 +406,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ngx_highlightjs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ngx-highlightjs */ "OtPg");
 /* harmony import */ var _components_code_block_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/code-block.component */ "vurP");
 /* harmony import */ var _components_abcd_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/abcd.component */ "oNVB");
+/* harmony import */ var _components_tabs_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/tabs.component */ "XPCo");
+
 
 
 
@@ -305,6 +426,8 @@ const componentParsers = [
     { component: ng_katex__WEBPACK_IMPORTED_MODULE_4__["KatexParagraphComponent"] },
     { component: ng_katex__WEBPACK_IMPORTED_MODULE_4__["KatexComponent"] },
     { component: _components_code_block_component__WEBPACK_IMPORTED_MODULE_10__["CodeBlockComponent"] },
+    { component: _components_tabs_component__WEBPACK_IMPORTED_MODULE_12__["TabsComponent"] },
+    { component: _components_tabs_component__WEBPACK_IMPORTED_MODULE_12__["TabBlockComponent"] },
 ];
 class AppModule {
 }
@@ -334,7 +457,9 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
         _components_side_navigation_component__WEBPACK_IMPORTED_MODULE_5__["SideNavigationComponent"],
         _components_view_component__WEBPACK_IMPORTED_MODULE_6__["ViewComponent"],
         _components_code_block_component__WEBPACK_IMPORTED_MODULE_10__["CodeBlockComponent"],
-        _components_abcd_component__WEBPACK_IMPORTED_MODULE_11__["AbcdComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
+        _components_abcd_component__WEBPACK_IMPORTED_MODULE_11__["AbcdComponent"],
+        _components_tabs_component__WEBPACK_IMPORTED_MODULE_12__["TabsComponent"],
+        _components_tabs_component__WEBPACK_IMPORTED_MODULE_12__["TabBlockComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
         ng_katex__WEBPACK_IMPORTED_MODULE_4__["KatexModule"],
         _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"],
         _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClientModule"],
@@ -348,6 +473,8 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
                     _components_view_component__WEBPACK_IMPORTED_MODULE_6__["ViewComponent"],
                     _components_code_block_component__WEBPACK_IMPORTED_MODULE_10__["CodeBlockComponent"],
                     _components_abcd_component__WEBPACK_IMPORTED_MODULE_11__["AbcdComponent"],
+                    _components_tabs_component__WEBPACK_IMPORTED_MODULE_12__["TabsComponent"],
+                    _components_tabs_component__WEBPACK_IMPORTED_MODULE_12__["TabBlockComponent"],
                 ],
                 imports: [
                     _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],

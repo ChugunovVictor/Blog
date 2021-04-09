@@ -10,11 +10,14 @@ import {DynamicHooksModule, HookParserEntry} from 'ngx-dynamic-hooks';
 import {HighlightModule, HIGHLIGHT_OPTIONS} from 'ngx-highlightjs';
 import {CodeBlockComponent} from './components/code-block.component';
 import { AbcdComponent } from './components/abcd.component';
+import { TabsComponent, TabBlockComponent } from './components/tabs.component';
 
 const componentParsers: Array<HookParserEntry> = [
     {component: KatexParagraphComponent},
     {component: KatexComponent},
     {component: CodeBlockComponent},
+    {component: TabsComponent},
+    {component: TabBlockComponent},
 ];
 
 @NgModule({
@@ -24,6 +27,8 @@ const componentParsers: Array<HookParserEntry> = [
         ViewComponent,
         CodeBlockComponent,
         AbcdComponent,
+        TabsComponent,
+        TabBlockComponent,
     ],
     imports: [
         BrowserModule,

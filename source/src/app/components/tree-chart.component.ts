@@ -56,7 +56,7 @@ export class TreeChartComponent implements AfterViewInit {
     let blocks = new Map()
 
     // @ts-ignore
-    levels[0] = Object.entries(diagram).filter(element => element[1].parent == "").map(element => new QueueElement( element[0], element[1].parent) )
+    levels[0] = Object.entries(diagram).filter(element => element[1].parent == "").map(element => new QueueElement( element[0], element[1].parent, element[1].background) )
 
     for(let level = 0; level < levels.length; level++){
       let queue = levels[level]
@@ -74,9 +74,10 @@ export class TreeChartComponent implements AfterViewInit {
         groupTag.setAttribute("transform", `translate(${(i+1)*horizontalOffset}, ${point_y})`)
         rectTag.setAttribute("width", textTag.clientWidth + 7.5 + "")
         rectTag.setAttribute("height", `${height}` /*textTag.clientHeight*/)
+        rectTag.setAttribute("fill", `${element.background}`)
 
         // @ts-ignore
-        let children = Object.entries(diagram).filter(c => c[1].parent == element.id).map(c => new QueueElement( c[0], c[1].parent))
+        let children = Object.entries(diagram).filter(c => c[1].parent == element.id).map(c => new QueueElement( c[0], c[1].parent, c[1].background))
         levels[level + 1] = levels[level + 1] ? levels[level + 1].concat(children) : children 
         
         blocks.set(element.id, element)

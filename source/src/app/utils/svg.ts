@@ -40,11 +40,13 @@ export class Point{
 export class QueueElement {
     id: string;
     parent: string;
+    background: string;
     in: Point;
     out: Point;
   
-    constructor(id: string, parent: string){
+    constructor(id: string, parent: string, background: string = '#FFF'){
       this.id = id;
       this.parent = parent;
+      this.background = background;
     }
   }

@@ -72,11 +72,12 @@ A self-learning machine from matchboxes has become a grandmaster of noughts and 
 Example of full tree:
 <app-tree-chart>
     { 
-      "000000000": { "parent":"" },
+      "000000000": { "parent":"", "background": "#BBB" },
+
       "100000000": { "parent":"000000000" },
       "010000000": { "parent":"000000000" },
       "001000000": { "parent":"000000000" },
-      "000100000": { "parent":"000000000" },
+      "000100000": { "parent":"000000000", "background": "#BBB"},
       "000010000": { "parent":"000000000" },
       "000001000": { "parent":"000000000" },
       "000000100": { "parent":"000000000" },
@@ -88,12 +89,12 @@ Example of full tree:
       "002100000": { "parent":"000100000" },
       "000120000": { "parent":"000100000" },
       "000102000": { "parent":"000100000" },
-      "000100200": { "parent":"000100000" },
+      "000100200": { "parent":"000100000", "background": "#BBB" },
       "000100020": { "parent":"000100000" },
       "000100002": { "parent":"000100000" },
 
       "100100200": { "parent":"000100200" },
-      "010100200": { "parent":"000100200" },
+      "010100200": { "parent":"000100200", "background": "#BBB" },
       "001100200": { "parent":"000100200" },
       "000110200": { "parent":"000100200" },
       "000101200": { "parent":"000100200" },
@@ -105,10 +106,10 @@ Example of full tree:
       "010120200": { "parent":"010100200" },
       "010102200": { "parent":"010100200" },
       "010100220": { "parent":"010100200" },
-      "010100202": { "parent":"010100200" },
+      "010100202": { "parent":"010100200", "background": "#BBB" },
 
       "110100202": { "parent":"010100202" },
-      "011100202": { "parent":"010100202" },
+      "011100202": { "parent":"010100202", "background": "#BBB" },
       "010110202": { "parent":"010100202" },
       "010101202": { "parent":"010100202" },
       "010100212": { "parent":"010100202" },
@@ -116,26 +117,36 @@ Example of full tree:
       "211100202": { "parent":"011100202" },
       "011120202": { "parent":"011100202" },
       "011102202": { "parent":"011100202" },
-      "011100222": { "parent":"011100202" },
+      "011100222": { "parent":"011100202", "background": "#BBB" },
 
       "111100222": { "parent":"011100222" },
-      "011110222": { "parent":"011100222" },
+      "011110222": { "parent":"011100222", "background": "#BBB" },
       "011101222": { "parent":"011100222" },
 
       "211110222": { "parent":"011110222" },
-      "011112222": { "parent":"011110222" },
+      "011112222": { "parent":"011110222", "background": "#BBB" },
 
-      "111112222": { "parent":"011112222" }
+      "111112222": { "parent":"011112222", "background": "#BBB" }
     }
 </app-tree-chart>
 Result:      
 <app-latex>
-    111112222 \Rightarrow \begin{vmatrix} 1 & 1 & 1 \\ 1 & 1 & 2 \\ 2 & 2 & 2 \end{vmatrix}
+    111112222 \Rightarrow
+    \begin{vmatrix}
+        1 & 1 & 1 \\
+        1 & 1 & 2 \\
+        2 & 2 & 2
+    \end{vmatrix}
 </app-latex>                           
 
-      Both wins, so we need to reduce tree until find who was thw first winner.
-      Three steps back:
-      <app-latex>
-        011100222 \Rightarrow \begin{vmatrix} 0 & 1 & 1 \\ 1 & 0 & 0 \\ 2 & 2 & 2 \end{vmatrix}
-    </app-latex>
-      Second win
+Both wins, so we need to reduce tree until find who was thw first winner.
+Three steps back:
+<app-latex>
+    011100222 \Rightarrow
+    \begin{vmatrix}
+        0 & 1 & 1 \\
+        1 & 0 & 0 \\
+        2 & 2 & 2
+    \end{vmatrix}
+</app-latex>
+Second win

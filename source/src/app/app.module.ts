@@ -11,6 +11,8 @@ import {HighlightModule, HIGHLIGHT_OPTIONS} from 'ngx-highlightjs';
 import {CodeBlockComponent} from './components/code-block.component';
 import { AbcdComponent } from './components/abcd.component';
 import { TabsComponent, TabBlockComponent } from './components/tabs.component';
+import { TreeChartComponent } from './components/tree-chart.component';
+import { LatexComponent } from './components/latex.component';
 
 const componentParsers: Array<HookParserEntry> = [
     {component: KatexParagraphComponent},
@@ -18,6 +20,8 @@ const componentParsers: Array<HookParserEntry> = [
     {component: CodeBlockComponent},
     {component: TabsComponent},
     {component: TabBlockComponent},
+    {component: TreeChartComponent},
+    {component: LatexComponent},
 ];
 
 @NgModule({
@@ -29,6 +33,8 @@ const componentParsers: Array<HookParserEntry> = [
         AbcdComponent,
         TabsComponent,
         TabBlockComponent,
+        TreeChartComponent,
+        LatexComponent,
     ],
     imports: [
         BrowserModule,
@@ -53,7 +59,7 @@ const componentParsers: Array<HookParserEntry> = [
         }
     }],
     bootstrap: [AppComponent],
-    entryComponents: [KatexComponent, KatexParagraphComponent, CodeBlockComponent],
+    entryComponents: [LatexComponent, KatexComponent, KatexParagraphComponent, CodeBlockComponent],
 })
 export class AppModule {
 }

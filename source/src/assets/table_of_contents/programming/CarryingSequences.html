@@ -3,10 +3,14 @@
 In mathematics and computer science, <b>currying</b> is the technique of converting a function that takes multiple arguments into a sequence of functions that each take a single argument. For example, currying a function <ng-katex equation='f'></ng-katex> that takes three arguments creates three functions:
 <br>
 
-<ng-katex equation='x = f(a,b,c)'></ng-katex>:<br>
-&nbsp;&nbsp;&nbsp;&nbsp; <ng-katex equation='h = g(a)'></ng-katex><br>
-&nbsp;&nbsp;&nbsp;&nbsp; <ng-katex equation='i = h(b)'></ng-katex><br>
-&nbsp;&nbsp;&nbsp;&nbsp; <ng-katex equation='x = i(c)'></ng-katex><br>
+<app-latex>
+    x = f(a,b,c) \Rightarrow 
+    \begin{Bmatrix}
+        h = g(a) \\ 
+        i = h(b) \\ 
+        x = i(c) 
+    \end{Bmatrix}
+</app-latex>
 
 It is quite usefull technique and today we will look how to use it while traversing sequences.
 As an example I choosed <b>SVG</b> path:

@@ -3,9 +3,9 @@
     {
       "title": "Development", "path": "programming",
       "children": [
-        { "title": "Carrying Sequences", "path": "CarryingSequences.html" },
-        { "title": "Functional Sets", "path": "FunctionalSets.html" },
-        { "title": "MENACE", "path": "Menace.html" }
+        { "title": "Carrying Sequences", "path": "CarryingSequences" },
+        { "title": "Functional Sets", "path": "FunctionalSets" },
+        { "title": "MENACE", "path": "Menace" }
       ]
     }
   ]

@@ -15,9 +15,14 @@ import { map, flatMap } from 'rxjs/operators';
 export class ViewComponent implements OnInit {
     content: string = ''
 
+    path(pre: string): string {
+        if(pre.endsWith('.html')) return pre;
+        else return pre + "/index.html";
+    }
+
     constructor(private http: HttpClient, private route: ActivatedRoute) {
         route.queryParams.pipe(
-            flatMap(params => http.get('./assets/table_of_contents/' + params['path'], {responseType: 'text'}))
+            flatMap(params => http.get('./assets/table_of_contents/' + this.path(params['path']), {responseType: 'text'}))
         ).subscribe(data => {
             this.content = data;
         })

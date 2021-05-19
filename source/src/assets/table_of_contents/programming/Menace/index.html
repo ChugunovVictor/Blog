@@ -1,0 +1,105 @@
+<h1> Matchbox Educable Noughts And Crosses Engine </h1>
+
+<a style="float: right;" href="http://reposing.blogspot.com/2007/07/donald-michie-83-theorist-of-artificial.html">
+    <img style="width: 300px; margin: 24px;" src="assets/images/Donald_Michie.jpg"/>
+</a>
+
+For experiments with self-learning machines that can play various games, it is not at all necessary to buy an electronic computer.<br>
+You just need to collect more empty matchboxes and colorful beads.<br>
+The happy idea of creating a simple and reliable self-learning machine from matchboxes belongs to 
+<b><i><a href="https://en.wikipedia.org/wiki/Donald_Michie">Donald Michie</a></i></b>.<br>
+In <i>"Trial and Error"</i>, Michie describes a self-learning tic-tac-toe machine that can be assembled from three hundred matchboxes.<br>
+This machine is called MENACE (Matchbox Educable Noughts And Crosses Engine). <br>
+
+<br>
+MENACE works very simply:<br>
+<ul>
+    <li>On each box is drawn some position that occurs when playing noughts and crosses.</li>
+    <span style="color: #777;">The first move (and therefore all odd moves) is always made by the machine, so on the boxes it is enough to write only those positions that appear before the odd moves.</span>
+    <li>Inside each box are multicolored glass beads of small diameter (each color corresponds to one of the possible moves of the machine).</li>
+    <span style="color: #777;">A cardboard corner is glued inside each box. By shaking and turning the box, the beads are rolled into a cardboard "corral".</span>
+    <li>The color of the bead hitting the top of the corner is random.</li>
+    <span style="color: #777;">The boxes belonging to the first move contain four beads of each color,
+in the boxes of the third move - three, in the boxes of the fifth move - two beads of each color, and, finally, in the boxes of the seventh move, each color is represented by only one bead.</span>
+<br>
+<span style="color: #777;">To find out the next move of the machine, you need to shake and turn over the box, then open it and see what color the "top" bead is,
+that is, a bead rolled into the top of the cardboard corner of the box; The boxes that "took part" in the game remain open until the end of the game.</span>
+    <li>If the machine wins, it is rewarded by adding three beads of the same color as the "top" bead to each open box.</li>
+    <li>If the game ends in a draw, only one bead is added to each box (of the same color as the "vertex" one).</li>
+    <li>If the car loses, it is "punished" by removing from each box a bead that has rolled into the top of the corner.</li>
+    <span style="color: #777;">This carrot-and-stick method finds very close parallels in the teaching of animals and even humans.<br>
+    The more tic-and-figure games Michi's machine plays, the better it "remembers" winning moves and the more persistently it tries to avoid losing moves.</span>
+</ul>
+
+<br>
+This means that, although it is a very simple, it is still a self-learning device. True, unlike the IBM 704, which works according to Samuel's chess program, our "match" machine does not know how to analyze the games played.
+and develop new "strategic visions" in line with lessons learned. <br>
+The first two-day tournament between Michi and his car consisted of 220 games. At first Michie punished his brainchild all the time for a bad game,
+but after seventeen games the machine began to put the first cross only in the corner cage, and after the twentieth game it ended all games in a draw.
+In the hopes of luring his opponent into a trap, Michi began making the most senseless moves. This tactic justified itself only as long as the machine
+did not learn to cope with these tricks. <br>
+The match ended with Michi's crushing defeat: he was eliminated from the tournament, having lost eight games out of ten.
+A self-learning machine from matchboxes has become a grandmaster of noughts and crosses!<br><br>
+
+<hr>
+Let's say that <b>0</b> - is not filled cell, <b>1</b> - is how did the first player go, <b>2</b> - is how did the second player go<br>
+Then players turns will looks like:
+<div style="display:flex; flex-direction:row; justify-content: space-around;">
+    <div style="flex:0.75">
+        <div style="display:flex; flex-direction:row; justify-content: space-around;" >
+            <app-latex>
+                000000000 \Rightarrow
+                \begin{vmatrix}
+                    0 & 0 & 0 \\
+                    0 & 0 & 0 \\
+                    0 & 0 & 0
+                \end{vmatrix}
+            </app-latex>
+            <app-latex>
+                010000000 \Rightarrow
+                \begin{vmatrix}
+                    0 & 1 & 0 \\
+                    0 & 0 & 0 \\
+                    0 & 0 & 0
+                \end{vmatrix}
+            </app-latex>
+            <app-latex>
+                010020000 \Rightarrow
+                \begin{vmatrix}
+                    0 & 1 & 0 \\
+                    0 & 2 & 0 \\
+                    0 & 0 & 0
+                \end{vmatrix}
+            </app-latex>
+        </div>
+
+        Result - Both wins, so we need to reduce tree until find who was thw first winner.
+        Three steps back:   
+        <div style="display:flex; flex-direction:row; justify-content: space-around;" >
+            <app-latex>
+                111112222 \Rightarrow
+                \begin{vmatrix}
+                    1 & 1 & 1 \\
+                    1 & 1 & 2 \\
+                    2 & 2 & 2
+                \end{vmatrix}
+            </app-latex>                           
+            <app-latex>
+                011100222 \Rightarrow
+                \begin{vmatrix}
+                    0 & 1 & 1 \\
+                    1 & 0 & 0 \\
+                    2 & 2 & 2
+                \end{vmatrix}
+            </app-latex>
+        </div>   
+        Second win
+    </div>
+    <div style="flex:1.25;">
+        <app-tree-chart src="tree.json"></app-tree-chart>
+    </div>
+</div>
+
+
+
+

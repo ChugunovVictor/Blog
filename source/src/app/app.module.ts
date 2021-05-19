@@ -1,27 +1,27 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
-import {KatexComponent, KatexModule, KatexParagraphComponent} from 'ng-katex';
-import {SideNavigationComponent} from './components/side-navigation.component';
-import {ViewComponent} from './components/view.component';
-import {HttpClientModule} from "@angular/common/http";
-import {DynamicHooksModule, HookParserEntry} from 'ngx-dynamic-hooks';
-import {HighlightModule, HIGHLIGHT_OPTIONS} from 'ngx-highlightjs';
-import {CodeBlockComponent} from './components/code-block.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { KatexComponent, KatexModule, KatexParagraphComponent } from 'ng-katex';
+import { SideNavigationComponent } from './components/side-navigation.component';
+import { ViewComponent } from './components/view.component';
+import { HttpClientModule } from "@angular/common/http";
+import { DynamicHooksModule, HookParserEntry } from 'ngx-dynamic-hooks';
+import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
+import { CodeBlockComponent } from './components/code-block.component';
 import { AbcdComponent } from './components/abcd.component';
 import { TabsComponent, TabBlockComponent } from './components/tabs.component';
 import { TreeChartComponent } from './components/tree-chart.component';
 import { LatexComponent } from './components/latex.component';
 
 const componentParsers: Array<HookParserEntry> = [
-    {component: KatexParagraphComponent},
-    {component: KatexComponent},
-    {component: CodeBlockComponent},
-    {component: TabsComponent},
-    {component: TabBlockComponent},
-    {component: TreeChartComponent},
-    {component: LatexComponent},
+    { component: KatexParagraphComponent },
+    { component: KatexComponent },
+    { component: CodeBlockComponent },
+    { component: TabsComponent },
+    { component: TabBlockComponent },
+    { component: TreeChartComponent },
+    { component: LatexComponent },
 ];
 
 @NgModule({

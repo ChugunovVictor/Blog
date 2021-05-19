@@ -177,9 +177,15 @@ class ViewComponent {
         this.http = http;
         this.route = route;
         this.content = '';
-        route.queryParams.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["flatMap"])(params => http.get('./assets/table_of_contents/' + params['path'], { responseType: 'text' }))).subscribe(data => {
+        route.queryParams.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["flatMap"])(params => http.get('./assets/table_of_contents/' + this.path(params['path']), { responseType: 'text' }))).subscribe(data => {
             this.content = data;
         });
+    }
+    path(pre) {
+        if (pre.endsWith('.html'))
+            return pre;
+        else
+            return pre + "/index.html";
     }
     ngOnInit() {
     }
@@ -200,6 +206,60 @@ ViewComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComp
                 styles: []
             }]
     }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] }]; }, null); })();
+
+
+/***/ }),
+
+/***/ "Mc1M":
+/*!******************************!*\
+  !*** ./src/app/utils/svg.ts ***!
+  \******************************/
+/*! exports provided: WrapperSVG, Point, QueueElement */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WrapperSVG", function() { return WrapperSVG; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Point", function() { return Point; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QueueElement", function() { return QueueElement; });
+class WrapperSVG {
+    constructor(type) {
+        this.curryingAttr = attr => value => this.element.setAttribute(attr, value);
+        this.element = document.createElementNS("http://www.w3.org/2000/svg", type);
+    }
+    setAttrs(...attrValue) {
+        let cur;
+        for (let value of attrValue) {
+            if (cur == undefined) {
+                cur = this.curryingAttr(value);
+            }
+            else {
+                cur = cur(value);
+            }
+        }
+        return this;
+    }
+    append(child) {
+        this.element.appendChild(child);
+        return this;
+    }
+    compile() {
+        return this.element;
+    }
+}
+class Point {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+class QueueElement {
+    constructor(id, parent, background = '#FFF') {
+        this.id = id;
+        this.parent = parent;
+        this.background = background;
+    }
+}
 
 
 /***/ }),
@@ -261,7 +321,7 @@ AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCompo
 /*! exports provided: root, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"root\":[{\"title\":\"Development\",\"path\":\"programming\",\"children\":[{\"title\":\"Carrying Sequences\",\"path\":\"CarryingSequences.html\"},{\"title\":\"Functional Sets\",\"path\":\"FunctionalSets.html\"},{\"title\":\"MENACE\",\"path\":\"Menace.html\"}]}]}");
+module.exports = JSON.parse("{\"root\":[{\"title\":\"Development\",\"path\":\"programming\",\"children\":[{\"title\":\"Carrying Sequences\",\"path\":\"CarryingSequences\"},{\"title\":\"Functional Sets\",\"path\":\"FunctionalSets\"},{\"title\":\"MENACE\",\"path\":\"Menace\"}]}]}");
 
 /***/ }),
 
@@ -407,6 +467,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_code_block_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/code-block.component */ "vurP");
 /* harmony import */ var _components_abcd_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/abcd.component */ "oNVB");
 /* harmony import */ var _components_tabs_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/tabs.component */ "XPCo");
+/* harmony import */ var _components_tree_chart_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/tree-chart.component */ "tTAp");
+/* harmony import */ var _components_latex_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/latex.component */ "kFIQ");
+
+
 
 
 
@@ -428,6 +492,8 @@ const componentParsers = [
     { component: _components_code_block_component__WEBPACK_IMPORTED_MODULE_10__["CodeBlockComponent"] },
     { component: _components_tabs_component__WEBPACK_IMPORTED_MODULE_12__["TabsComponent"] },
     { component: _components_tabs_component__WEBPACK_IMPORTED_MODULE_12__["TabBlockComponent"] },
+    { component: _components_tree_chart_component__WEBPACK_IMPORTED_MODULE_13__["TreeChartComponent"] },
+    { component: _components_latex_component__WEBPACK_IMPORTED_MODULE_14__["LatexComponent"] },
 ];
 class AppModule {
 }
@@ -459,7 +525,9 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
         _components_code_block_component__WEBPACK_IMPORTED_MODULE_10__["CodeBlockComponent"],
         _components_abcd_component__WEBPACK_IMPORTED_MODULE_11__["AbcdComponent"],
         _components_tabs_component__WEBPACK_IMPORTED_MODULE_12__["TabsComponent"],
-        _components_tabs_component__WEBPACK_IMPORTED_MODULE_12__["TabBlockComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
+        _components_tabs_component__WEBPACK_IMPORTED_MODULE_12__["TabBlockComponent"],
+        _components_tree_chart_component__WEBPACK_IMPORTED_MODULE_13__["TreeChartComponent"],
+        _components_latex_component__WEBPACK_IMPORTED_MODULE_14__["LatexComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
         ng_katex__WEBPACK_IMPORTED_MODULE_4__["KatexModule"],
         _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"],
         _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClientModule"],
@@ -475,6 +543,8 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
                     _components_abcd_component__WEBPACK_IMPORTED_MODULE_11__["AbcdComponent"],
                     _components_tabs_component__WEBPACK_IMPORTED_MODULE_12__["TabsComponent"],
                     _components_tabs_component__WEBPACK_IMPORTED_MODULE_12__["TabBlockComponent"],
+                    _components_tree_chart_component__WEBPACK_IMPORTED_MODULE_13__["TreeChartComponent"],
+                    _components_latex_component__WEBPACK_IMPORTED_MODULE_14__["LatexComponent"],
                 ],
                 imports: [
                     _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -499,9 +569,71 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
                         }
                     }],
                 bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]],
-                entryComponents: [ng_katex__WEBPACK_IMPORTED_MODULE_4__["KatexComponent"], ng_katex__WEBPACK_IMPORTED_MODULE_4__["KatexParagraphComponent"], _components_code_block_component__WEBPACK_IMPORTED_MODULE_10__["CodeBlockComponent"]],
+                entryComponents: [_components_latex_component__WEBPACK_IMPORTED_MODULE_14__["LatexComponent"], ng_katex__WEBPACK_IMPORTED_MODULE_4__["KatexComponent"], ng_katex__WEBPACK_IMPORTED_MODULE_4__["KatexParagraphComponent"], _components_code_block_component__WEBPACK_IMPORTED_MODULE_10__["CodeBlockComponent"]],
             }]
     }], null, null); })();
+
+
+/***/ }),
+
+/***/ "kFIQ":
+/*!***********************************************!*\
+  !*** ./src/app/components/latex.component.ts ***!
+  \***********************************************/
+/*! exports provided: LatexComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LatexComponent", function() { return LatexComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var ng_katex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ng-katex */ "a7Q/");
+
+
+
+const _c0 = ["wrapper"];
+const _c1 = ["*"];
+class LatexComponent {
+    constructor() {
+        this.code = "";
+    }
+    ngAfterViewInit() {
+        this.code = '$' + this.content.nativeElement.innerText.trim().replaceAll('\n', '') + '$';
+    }
+}
+LatexComponent.ɵfac = function LatexComponent_Factory(t) { return new (t || LatexComponent)(); };
+LatexComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: LatexComponent, selectors: [["app-latex"]], viewQuery: function LatexComponent_Query(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵviewQuery"](_c0, true);
+    } if (rf & 2) {
+        var _t;
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵloadQuery"]()) && (ctx.content = _t.first);
+    } }, ngContentSelectors: _c1, decls: 4, vars: 1, consts: [[2, "display", "none"], ["wrapper", ""], [3, "paragraph"]], template: function LatexComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵprojectionDef"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0, 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵprojection"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "ng-katex-paragraph", 2);
+    } if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("paragraph", ctx.code);
+    } }, directives: [ng_katex__WEBPACK_IMPORTED_MODULE_1__["KatexParagraphComponent"]], encapsulation: 2 });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](LatexComponent, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+                selector: 'app-latex',
+                template: `
+    <div #wrapper style="display: none">
+      <!-- transclusion slot -->
+      <ng-content></ng-content>
+    </div>
+    <ng-katex-paragraph [paragraph]="code"></ng-katex-paragraph>
+  `,
+                styles: []
+            }]
+    }], function () { return []; }, { content: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
+            args: ['wrapper']
+        }] }); })();
 
 
 /***/ }),
@@ -668,6 +800,166 @@ AbcdComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComp
 
 /***/ }),
 
+/***/ "tTAp":
+/*!****************************************************!*\
+  !*** ./src/app/components/tree-chart.component.ts ***!
+  \****************************************************/
+/*! exports provided: TreeChartComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TreeChartComponent", function() { return TreeChartComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "qCKp");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
+/* harmony import */ var _utils_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/svg */ "Mc1M");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "tyNb");
+
+
+
+
+
+
+
+const _c0 = ["wrapper"];
+const _c1 = ["svg"];
+const _c2 = ["*"];
+class TreeChartComponent {
+    /*
+      id : children is redundant - to find roots there are unnecessary actions
+      defining parent much more convenient, so id : parent
+      {
+        "1": { "parent":"" },
+        "2": { "parent":"1" },
+        "3": { "parent":"1" },
+        "4": { "parent":"3" }
+        } */
+    constructor(http, route) {
+        this.http = http;
+        this.route = route;
+        this.src = '';
+    }
+    block(text) {
+        let groupTag = new _utils_svg__WEBPACK_IMPORTED_MODULE_3__["WrapperSVG"]("g");
+        let rectTag = new _utils_svg__WEBPACK_IMPORTED_MODULE_3__["WrapperSVG"]("rect").setAttrs("x", 0, "y", 0, "rx", 5, "fill", "none", "stroke", "black").compile();
+        let textContent = document.createTextNode(text);
+        let textTag = new _utils_svg__WEBPACK_IMPORTED_MODULE_3__["WrapperSVG"]("text").setAttrs("x", 5, "y", 20).append(textContent).compile();
+        return [groupTag.append(rectTag).append(textTag).compile(), textTag, rectTag /* we could adjust width only after adding textTag into svg */];
+    }
+    path(x1, y1, x2, y2) {
+        let dx = Math.abs(x1 - (x1 - x2) / 2);
+        let dy = Math.abs(y1 - (y1 - y2) / 2);
+        return new _utils_svg__WEBPACK_IMPORTED_MODULE_3__["WrapperSVG"]("path").setAttrs("stroke", "black", "fill", "none", "d", `M ${x1},${y1}
+        C ${x1},${dy} ${dx},${dy} ${dx},${dy}
+          ${dx},${dy} ${x2},${dy} ${x2},${y2 - 5}`, "marker-end", "url(#arrowhead)").compile();
+    }
+    getContent() {
+        if (this.src) {
+            return this.route.queryParams.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["flatMap"])(params => this.http.get("./assets/table_of_contents/" + params['path'] + "/" + this.src, { responseType: 'text' })));
+        }
+        else
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(this.content.nativeElement.innerText.trim());
+    }
+    ngAfterViewInit() {
+        const levelOffset = 30;
+        const height = 30;
+        const levelPadding = 30;
+        const width = this.svg.nativeElement.parentElement.offsetWidth;
+        this.getContent().subscribe(json => {
+            console.log(json);
+            let diagram = JSON.parse(json);
+            let levels = Array();
+            let blocks = new Map();
+            // @ts-ignore
+            levels[0] = Object.entries(diagram).filter(element => element[1].parent == "").map(element => new _utils_svg__WEBPACK_IMPORTED_MODULE_3__["QueueElement"](element[0], element[1].parent, element[1].background));
+            for (let level = 0; level < levels.length; level++) {
+                let queue = levels[level];
+                let horizontalOffset = width / (queue.length + 1);
+                for (let i = 0; i < queue.length; i++) {
+                    let element = queue[i];
+                    let [groupTag, textTag, rectTag] = this.block(element.id);
+                    this.svg.nativeElement.appendChild(groupTag);
+                    let point_y = level * levelOffset + level * levelPadding;
+                    let point_x = (i + 1) * horizontalOffset + (textTag.clientWidth + 5) / 2;
+                    element.in = new _utils_svg__WEBPACK_IMPORTED_MODULE_3__["Point"](point_x, point_y);
+                    element.out = new _utils_svg__WEBPACK_IMPORTED_MODULE_3__["Point"](point_x, point_y + height);
+                    groupTag.setAttribute("transform", `translate(${(i + 1) * horizontalOffset}, ${point_y})`);
+                    rectTag.setAttribute("width", textTag.clientWidth + 5 + "");
+                    rectTag.setAttribute("height", `${height}` /*textTag.clientHeight*/);
+                    rectTag.setAttribute("fill", `${element.background}`);
+                    // @ts-ignore
+                    let children = Object.entries(diagram).filter(c => c[1].parent == element.id).map(c => new _utils_svg__WEBPACK_IMPORTED_MODULE_3__["QueueElement"](c[0], c[1].parent, c[1].background));
+                    levels[level + 1] = levels[level + 1] ? levels[level + 1].concat(children) : children;
+                    blocks.set(element.id, element);
+                }
+            }
+            for (let block of blocks.values()) {
+                if (block.parent && blocks.get(block.parent)) {
+                    let parent = blocks.get(block.parent);
+                    let path = this.path(parent.out.x, parent.out.y, block.in.x, block.in.y);
+                    this.svg.nativeElement.appendChild(path);
+                }
+            }
+            this.svg.nativeElement.setAttribute("height", `${levels.length * levelOffset + levels.length * levelPadding}`);
+        });
+    }
+}
+TreeChartComponent.ɵfac = function TreeChartComponent_Factory(t) { return new (t || TreeChartComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"])); };
+TreeChartComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: TreeChartComponent, selectors: [["app-tree-chart"]], viewQuery: function TreeChartComponent_Query(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵviewQuery"](_c0, true);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵviewQuery"](_c1, true);
+    } if (rf & 2) {
+        var _t;
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵloadQuery"]()) && (ctx.content = _t.first);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵloadQuery"]()) && (ctx.svg = _t.first);
+    } }, inputs: { src: "src" }, ngContentSelectors: _c2, decls: 8, vars: 0, consts: [[2, "display", "none"], ["wrapper", ""], [2, "width", "100%"], ["svg", ""], ["id", "arrowhead", "markerWidth", "10", "markerHeight", "7", "refX", "0", "refY", "3.5", "orient", "auto"], ["points", "0 0, 5 3.5, 0 7"]], template: function TreeChartComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵprojectionDef"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0, 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵprojection"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnamespaceSVG"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "svg", 2, 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "defs");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "marker", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](7, "polygon", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    } }, encapsulation: 2 });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](TreeChartComponent, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+                selector: 'app-tree-chart',
+                template: `
+  <div #wrapper style="display: none">
+    <!-- transclusion slot -->
+    <ng-content></ng-content>
+  </div>
+  <svg #svg style="width:100%">
+    <defs>
+      <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+        <polygon points="0 0, 5 3.5, 0 7" />
+      </marker>
+    </defs>
+  </svg>
+  `,
+                styles: []
+            }]
+    }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"] }]; }, { content: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
+            args: ['wrapper']
+        }], svg: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
+            args: ['svg']
+        }], src: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }] }); })();
+
+
+/***/ }),
+
 /***/ "vY5A":
 /*!***************************************!*\
   !*** ./src/app/app-routing.module.ts ***!
@@ -720,7 +1012,13 @@ AppRoutingModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineI
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CodeBlockComponent", function() { return CodeBlockComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var ngx_highlightjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ngx-highlightjs */ "OtPg");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var ngx_highlightjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-highlightjs */ "OtPg");
+
+
+
 
 
 
@@ -728,20 +1026,26 @@ const _c0 = ["wrapper"];
 const _c1 = ["*"];
 // contenteditable="true"
 class CodeBlockComponent {
-    constructor() {
+    constructor(http, route) {
+        this.http = http;
+        this.route = route;
         this.code = "";
     }
     ngAfterViewInit() {
-        this.code = this.content.nativeElement.innerText.trim();
+        if (this.src) {
+            this.route.queryParams.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["flatMap"])(params => this.http.get("./assets/table_of_contents/" + params['path'] + "/" + this.src, { responseType: 'text' }))).subscribe(data => this.code = data);
+        }
+        else
+            this.code = this.content.nativeElement.innerText.trim();
     }
 }
-CodeBlockComponent.ɵfac = function CodeBlockComponent_Factory(t) { return new (t || CodeBlockComponent)(); };
+CodeBlockComponent.ɵfac = function CodeBlockComponent_Factory(t) { return new (t || CodeBlockComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"])); };
 CodeBlockComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: CodeBlockComponent, selectors: [["app-code-block"]], viewQuery: function CodeBlockComponent_Query(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵviewQuery"](_c0, true);
     } if (rf & 2) {
         var _t;
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵloadQuery"]()) && (ctx.content = _t.first);
-    } }, ngContentSelectors: _c1, decls: 7, vars: 2, consts: [[2, "display", "none"], ["wrapper", ""], [3, "highlight", "lineNumbers"]], template: function CodeBlockComponent_Template(rf, ctx) { if (rf & 1) {
+    } }, inputs: { src: "src" }, ngContentSelectors: _c1, decls: 7, vars: 2, consts: [[2, "display", "none"], ["wrapper", ""], [3, "highlight", "lineNumbers"]], template: function CodeBlockComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵprojectionDef"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0, 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵprojection"](2);
@@ -754,7 +1058,7 @@ CodeBlockComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefin
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("highlight", ctx.code)("lineNumbers", true);
-    } }, directives: [ngx_highlightjs__WEBPACK_IMPORTED_MODULE_1__["Highlight"]], styles: ["pre[_ngcontent-%COMP%] { margin: 0; }"] });
+    } }, directives: [ngx_highlightjs__WEBPACK_IMPORTED_MODULE_4__["Highlight"]], styles: ["pre[_ngcontent-%COMP%] { margin: 0; }"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](CodeBlockComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
@@ -772,9 +1076,11 @@ CodeBlockComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefin
                     'pre { margin: 0; }',
                 ]
             }]
-    }], function () { return []; }, { content: [{
+    }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] }]; }, { content: [{
             type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
             args: ['wrapper']
+        }], src: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
         }] }); })();
 
 
